@@ -1,6 +1,18 @@
 body {
     min-height: 75rem;
 }
+li a{
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+}
+div button{
+    font-size: 1.2rem;
+}
+li a img{
+    flex-direction: column;
+    justify-content: start;
+
+}
 
 .imagenNav{
     width: 45px;
