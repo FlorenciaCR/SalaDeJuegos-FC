@@ -1,18 +1,21 @@
-<div class="divSection">
-    <section>
-        <article class="loginImg">
+    <div>
+      <section class="container">
+        <article class="imagen">
           <img class='imagLogin'src="../../../assets/astroRegistro.png" alt="">
         </article>
-      <article class="login">
-        <form action="#">
-          <h1>Registrarse</h1>
-          <div class="social-container">
-            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <button class="buttonLogIn">Registrarme</button>
-        </form>
-      </article>
-    </section>
-  </div>
+        <article class="articleLogin">
+          <form action="#" >
+            <h1>Registrarme</h1>
+            <button class="buttonDatos" (click)="IrAlLogin()"><span style="font-weight: normal;">Ir al logIn</span></button>
+            <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email" />
+            <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd" />
+            <!--Error xd-->
+            <div><p>{{responseMessage}}</p></div>
+            <button class="buttonLogIn" (click)="Registrar()">Registrarme</button>
+          </form>
+        </article>
+      </section>
+    </div>
+    
+    
+  

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JuegosrComponent } from './juegosr.component';
+import { GenericDialogComponent } from './generic-dialog.component';
 
-describe('JuegosrComponent', () => {
-  let component: JuegosrComponent;
-  let fixture: ComponentFixture<JuegosrComponent>;
+describe('GenericDialogComponent', () => {
+  let component: GenericDialogComponent;
+  let fixture: ComponentFixture<GenericDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JuegosrComponent ]
+      declarations: [ GenericDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JuegosrComponent);
+    fixture = TestBed.createComponent(GenericDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

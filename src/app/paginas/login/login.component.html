@@ -1,22 +1,25 @@
-<div class="divSection">
-  <section>
-    <article class="login">
-      <form action="#">
-        <h1>LogIn</h1>
-        <div class="social-container">
-          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        </div>
-        <span style="font-weight: bold;">Entrar como invitado</span>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button class="buttonLogIn">Sign Up</button>
-      </form>
-    </article>
-    <article class="loginImg">
-      <img class='imagLogin'src="../../../assets/astroLogin.png" alt="">
-    </article>
-  </section>
-</div>
+<section class="container">
+  <article class="articleLogin">
+    <form action="#" >
+      <h1>Log In</h1>
+      <button class="buttonDatos" (click)="CompletarDatos()"><span style="font-weight:normal;">Entrar como invitado</span></button>
+      <button class="buttonDatos" (click)="IrAlRegistro()"><span style="font-weight: normal;">Registrarme</span></button>
+      <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email" />
+      <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd" />
+       <!--Error xd-->
+       <div><p>{{responseMessage}}</p></div>
+      <button class="buttonLogIn" (click)="Ingresar()">Ingresar</button>
+    </form>
+  </article>
+  <article class="imagen">
+    <img class='imagLogin'src="../../../assets/astroLogin.png" alt="">
+  </article>
+</section>
+
+
+
+
+
   <!-- <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
   <div class="container" id="container">
     <div class="form-container sign-up-container">
