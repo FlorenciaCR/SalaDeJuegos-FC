@@ -12,6 +12,7 @@ import { Usuario } from 'src/app/clases/Usuario';
 export class NavBarComponent implements OnInit {
 
   usuarioLogueado = this.authService.getCurrentUser();
+  estaLogueado : any = null;
   constructor(private authService:AuthService, private router: Router)
   { }
 
@@ -22,6 +23,7 @@ export class NavBarComponent implements OnInit {
   {
     this.authService.getCurrentUser().subscribe(res =>{
       console.log(res?.email);
+      this.estaLogueado = res ? true: false;
     })
   }
 

@@ -58,7 +58,14 @@ export class LoginComponent implements OnInit {
             email : this.miUsuario.email,
             date: new Date() 
           }
-          this.authService.SendUserLog(usuarioJson);
+          this.authService.sendUserLog(usuarioJson)
+          .then(res=>{
+            console.log('Usuario log subido correctamente.');
+          })
+          .catch(err=>{
+            console.log('Error al subirlo el log usuario :(');
+          })
+
           this.router.navigate(['home']);
         }
       }); 

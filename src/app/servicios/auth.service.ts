@@ -37,7 +37,7 @@ export class AuthService {
     this.afauth.signOut();
   }
 
-  SendUserLog(user : any){  
+  sendUserLog(user : any){  
     return this.firestore.collection("userLogins").add(user);
   }
 
