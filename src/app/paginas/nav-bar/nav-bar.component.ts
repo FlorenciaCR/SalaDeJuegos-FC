@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit {
   { }
 
   ngOnInit(): void {
+    this.ObtenerUsuarioLogueado();
   }
 
   ObtenerUsuarioLogueado()
@@ -29,6 +30,7 @@ export class NavBarComponent implements OnInit {
 
   CerrarSesion()
   {
+    this.estaLogueado = false;
     this.authService.logOut();
   }
 
