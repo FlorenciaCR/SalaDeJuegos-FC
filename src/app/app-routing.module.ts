@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'registro', component:RegistroComponent},
   {path:'quienSoy', component:QuienSoyComponent},
-  {path:'', redirectTo: '/home',pathMatch:'full'},
+  {path:'', redirectTo: 'login',pathMatch:'full'},
   {path:'juegos', component:JuegosMenuComponent, children:[
     {path:'mayorMenor',component:MayorMenorComponent},
     {path:'ahorcado',component:AhorcadoComponent},
