@@ -7,10 +7,10 @@
           <form action="#" >
             <h1>Registrarme</h1>
             <button class="buttonDatos" (click)="IrAlLogin()"><span style="font-weight: normal;">Ir al logIn</span></button>
-            <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email" />
-            <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd" />
+            <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email" autocomplete="on"/>
+            <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd" autocomplete="on" />
             <!--Error xd-->
-            <div><p>{{responseMessage}}</p></div>
+            <p *ngIf="responseMessage" class="divpError">{{responseMessage}}</p>
             <button class="buttonLogIn" (click)="Registrar()">Registrarme</button>
           </form>
         </article>

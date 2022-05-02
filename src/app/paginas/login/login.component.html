@@ -1,17 +1,20 @@
-<section class="container">
-  <article class="articleLogin">
+<section class="container ">
+  <article class="articleLogin shadow">
     <form action="#" >
       <h1>Log In</h1>
       <button class="buttonDatos" (click)="CompletarDatos()"><span style="font-weight:normal;">Entrar como invitado</span></button>
       <button class="buttonDatos" (click)="IrAlRegistro()"><span style="font-weight: normal;">Registrarme</span></button>
-      <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email" />
-      <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd" />
+
+      <input type="email" placeholder="Email" [(ngModel)]="this.miUsuario.email" name="email"/>
+      <input type="password" placeholder="Password" [(ngModel)]="this.miUsuario.contrasenia" name="pwd"  />
+      
        <!--Error xd-->
-       <div><p>{{responseMessage}}</p></div>
+      <p *ngIf="responseMessage" class="divpError">{{responseMessage}}</p>
+
       <button class="buttonLogIn" (click)="Ingresar()">Ingresar</button>
     </form>
   </article>
-  <article class="imagen">
+  <article class="imagen shadow">
     <img class='imagLogin'src="../../../assets/astroLogin.png" alt="">
   </article>
 </section>

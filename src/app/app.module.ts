@@ -15,10 +15,7 @@ import { JuegosMenuComponent } from './paginas/juegos-menu/juegos-menu.component
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from "src/environments/environment";
 import { NavBarComponent } from './paginas/nav-bar/nav-bar.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import { GenericDialogComponent } from './dialogs/generic-dialog/generic-dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -35,16 +32,15 @@ import {MatButtonModule} from '@angular/material/button';
    MayorMenorComponent,
    JuegosMenuComponent,
    NavBarComponent,
-   GenericDialogComponent
+ 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    MatDialogModule,
-    BrowserAnimationsModule,
-    MatButtonModule
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

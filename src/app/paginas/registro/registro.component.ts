@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Usuario } from 'src/app/clases/Usuario';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { GenericDialogComponent } from 'src/app/dialogs/generic-dialog/generic-dialog.component';
+
 
 @Component({
   selector: 'app-registro',
@@ -12,12 +11,11 @@ import { GenericDialogComponent } from 'src/app/dialogs/generic-dialog/generic-d
 })
 export class RegistroComponent implements OnInit {
 
-  responseMessage : string ='';
+  responseMessage : boolean | string =false;
   miUsuario : Usuario = new Usuario();
 
   constructor(private authService:AuthService,
               private router : Router,
-              private errorDialog : MatDialog
              ) 
   {
   }
@@ -28,6 +26,13 @@ export class RegistroComponent implements OnInit {
   Registrar(){
       const {email,contrasenia} = this.miUsuario;
       this.authService.register(email,contrasenia)
+      .then(res=>{
+        console.log("Se registro el usuario",res);
+        if(res !=null )
+        {
+          this.router.navigate(['home']);
+        }
+      })
       .catch(err =>{
         //this.responseMessage = err.message;
         switch(err.code)
@@ -41,16 +46,17 @@ export class RegistroComponent implements OnInit {
           case 'auth/operation-not-allowed':
             this.responseMessage= 'Operacion no valido xd';
             break;      
-            //auth/weak-password       
+          case 'auth/weak-password':
+            this.responseMessage='La contrasenia debe tener al menos 6 caracteres'
+            break; 
+          case 'auth/internal-error':
+            this.responseMessage='Vacios los campos'
+            break;       
+          default:
+            this.responseMessage = 'Error';
+            break;
         }
         console.log('Error en el registro A: ',err);
-      })
-      .then(res=>{
-        console.log("Se registro el usuario",res);
-        if(res !=null )
-        {
-          this.router.navigate(['home']);
-        }
       });      
   }
 

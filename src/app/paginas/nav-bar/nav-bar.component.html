@@ -19,13 +19,17 @@
         </ul>
   
         <!--Esta prolijo but arreglar-->
-        <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" *ngIf="usuarioLogueado | async as usuarioLogueado">
+        <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" *ngIf=" usuarioLogueado | async as usuarioLogueado">
           <p class="nav-item">{{usuarioLogueado.email}}</p>
         </div>
   
         <div class="text-end"  *ngIf="usuarioLogueado | async as usuarioLogueado">
           <button type="button" class="btn btn-outline-light me-2" (click)="CerrarSesion()" [routerLink]="['/login']"> Log Out</button>
-          <!-- <button type="button" class="btn btn-warning" [routerLink]="['/registro']">Registro</button>  -->
+        </div>
+
+        <div class="text-end" *ngIf="!estaLogueado">
+            <button type="button" class="btn btn-outline-light me-2" [routerLink]="['/registro']">Registro</button>
+            <button type="button" class="btn btn-warning" [routerLink]="['/login']">LogIn</button>
         </div>
 
       </div>

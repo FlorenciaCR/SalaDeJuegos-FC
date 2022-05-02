@@ -14,16 +14,18 @@ export class NavBarComponent implements OnInit {
   usuarioLogueado = this.authService.getCurrentUser();
   estaLogueado : any = null;
   constructor(private authService:AuthService, private router: Router)
-  { }
+  {
+    this.ObtenerUsuarioLogueado();
+  }
 
   ngOnInit(): void {
-    this.ObtenerUsuarioLogueado();
+    
   }
 
   ObtenerUsuarioLogueado()
   {
     this.authService.getCurrentUser().subscribe(res =>{
-      console.log(res?.email);
+      console.log('obtener usuario log: '+ res?.email);
       this.estaLogueado = res ? true: false;
     })
   }

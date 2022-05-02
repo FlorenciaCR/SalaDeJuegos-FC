@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/Usuario';
 import { AuthService } from 'src/app/servicios/auth.service';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,9 +10,8 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  responseMessage : string ='';
+  responseMessage : boolean | string =false;
   miUsuario : Usuario = new Usuario();
-
 
   constructor(private authService:AuthService, private router: Router) {
 
@@ -23,35 +20,28 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  logUsuario()
+  {
+    let usuarioJson : any = {
+      email : this.miUsuario.email,
+      date: new Date() 
+    }
+    this.authService.sendUserLog(usuarioJson)
+    .then(res=>{
+      console.log('Usuario log subido correctamente.');
+    })
+    .catch(err=>{
+      console.log('Error al subirlo el log usuario :(');
+    })
+  }
     
   Ingresar(){
     try{
       console.log(this.miUsuario);
       const {email,contrasenia} = this.miUsuario;
       this.authService.logIn(email,contrasenia)
-      .catch(err =>{
-        //this.responseMessage = err.message;
-        switch(err.code)
-        {
-          case 'auth/user-disabled':
-            this.responseMessage= 'Usuario deshabilitado.';
-            break;
-          case 'auth/user-not-found':
-            this.responseMessage= 'Usuario no encontrado.';
-            break;       
-          case 'auth/wrong-password':
-            this.responseMessage= 'Contrasenia incorrecta.';
-            break;  
-          case 'auth/invalid-email':
-           this.responseMessage= 'Email invalido.';
-            break;     
-            //auth/weak-password       
-        }
-        console.log('Error en login A: ',err);
-      })
       .then(res=>{
-        console.log("Se logueo el usuario",res);
+        console.log("Se logueo el usuario: ",res);
         if(res !=null )
         {
           let usuarioJson : any = {
@@ -65,9 +55,32 @@ export class LoginComponent implements OnInit {
           .catch(err=>{
             console.log('Error al subirlo el log usuario :(');
           })
-
           this.router.navigate(['home']);
         }
+      })
+      .catch(err =>{
+        //this.responseMessage = err.message;
+        switch(err.code)
+        {
+          case 'auth/invalid-email':
+           this.responseMessage= 'Email invalido.';
+            break;     
+          case 'auth/user-disabled':
+            this.responseMessage= 'Usuario deshabilitado.';
+            break;
+          case 'auth/user-not-found':
+            this.responseMessage= 'Usuario no encontrado.';
+            break;       
+          case 'auth/wrong-password':
+            this.responseMessage= 'Contrasenia incorrecta.';
+            break;  
+          case 'auth/user-not-found':
+            this.responseMessage='Usuario no encontrado.';
+            break;
+          default:
+            this.responseMessage = 'Error';
+        }
+        console.log('Error en login.ts: ',err);
       }); 
 
     }catch(err){
