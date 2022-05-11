@@ -1,0 +1,63 @@
+<!-- <div class="container main-container">
+<div style="border: red solid 1px ;">
+  <h1>Chat</h1>
+  <hr>
+  <div class="text-right" *ngFor="let mensaje of mensajes">
+    <span class="badge badge-info" >{{mensaje?.usuario?.email}}</span>
+    <p>
+      {{mensaje?.fecha}} - {{mensaje?.texto}}
+    </p>
+  </div>
+
+  <input type="text" name="mensaje" [(ngModel)]="mensaje" class="form-control">
+  <button (click)="enviarMensaje()">Enviar</button>
+</div>
+</div> -->
+
+
+<div class="container" id="page-content">
+  <div class="padding">
+      <div class="container d-flex justify-content-center">
+<div class="col-md-4">
+           
+            <div class="box box-warning direct-chat direct-chat-warning">
+              <div class="box-header with-border" style="padding-bottom: 0px; margin-bottom:0%">
+                <h3 class="box-title" style="font-weight:bold">Chat Messages</h3>
+                <hr>
+              </div>
+            
+              <div class="box-body">
+                <div class="direct-chat-messages">
+                  <div class="direct-chat-msg" *ngFor="let mensaje of mensajes">
+
+                    <div class="direct-chat-info clearfix">
+                      <span class="direct-chat-name pull-left" style="font-weight:bold;  color:#1F2937 ">{{mensaje?.usuario?.email}}</span>
+                      <span class="direct-chat-timestamp pull-right" style="margin-left: 10px;">{{mensaje?.fecha}}</span>
+                    </div>
+                    <div class="direct-chat-text">
+                      {{mensaje?.texto}}
+                    </div>
+
+                 </div>
+                </div>
+              </div>
+
+              <div class="box-footer">
+                <form action="#" method="post">
+                  <div class="input-group">
+                    <input type="text" placeholder="Escribe un mensaje"  name="mensaje" [(ngModel)]="mensaje" class="form-control">
+                    <span class="input-group-btn">
+                          <button type="button" class="btn btn-warning btn-flat" (click)="enviarMensaje()">Enviar</button>
+                        </span>
+                  </div>
+                </form>
+              </div>
+           
+            </div>
+         
+          </div>
+           </div>
+          
+            </div>
+           
+          </div>

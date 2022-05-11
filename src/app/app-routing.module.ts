@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
 import { AhorcadoComponent } from './juegos/ahorcado/ahorcado.component';
 import { MayorMenorComponent } from './juegos/mayor-menor/mayor-menor.component';
 import { PreguntadosComponent } from './juegos/preguntados/preguntados.component';
@@ -14,15 +15,12 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'registro', component:RegistroComponent},
   {path:'quienSoy', component:QuienSoyComponent},
+  {path:'chat', component: ChatComponent},
   {path:'', redirectTo: 'login',pathMatch:'full'},
-  {path:'juegos', component:JuegosMenuComponent, children:[
-    {path:'mayorMenor',component:MayorMenorComponent},
-    {path:'ahorcado',component:AhorcadoComponent},
-    {path:'preguntados',component:PreguntadosComponent}
-  ]},
-  {path:'**', component:ErrorComponent}
-  
-  
+  {
+    path: "juegos",
+    loadChildren: () => import('./juegos/juegos-routing.module').then(m => m.JuegosRoutingModule),
+  },
 ];
 
 @NgModule({

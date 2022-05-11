@@ -1,0 +1,16 @@
+<h2 class="text-center" style="margin-top: 15px;">TruchOsu!👆</h2>
+<div class="divJuego">
+    <div class="contenedor pointer">
+		
+		<span id="ned"></span>
+		
+	</div>
+	<div class="contenedor">
+		<!-- <div id="player" [ngStyle]="player" (ng-mouseover)="sumarPuntos()"></div>-->
+        <div id="player" [ngStyle]="{'background-color':'green'}" (click)="sumarPuntos()"></div>
+	</div>
+</div>
+<div style="display:flex ; justify-content: center; margin-top: 10px;">
+	<span id="puntos" style="background-color:black; color: aliceblue;">Puntos:{{puntos}}</span>
+	<span id="tiempo" style="background-color:red; color: aliceblue;">Tiempo:{{tiempo}}</span>
+</div>

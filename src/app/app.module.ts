@@ -15,7 +15,9 @@ import { JuegosMenuComponent } from './paginas/juegos-menu/juegos-menu.component
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from "src/environments/environment";
 import { NavBarComponent } from './paginas/nav-bar/nav-bar.component';
-
+import { CommonModule } from '@angular/common';
+import { ChatComponent } from './chat/chat.component';
+import { ChatService } from './servicios/chat.service';
 
 
 
@@ -32,17 +34,19 @@ import { NavBarComponent } from './paginas/nav-bar/nav-bar.component';
    MayorMenorComponent,
    JuegosMenuComponent,
    NavBarComponent,
+   ChatComponent,
  
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-
-    
   ],
-  providers: [],
+  providers: [
+    ChatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
