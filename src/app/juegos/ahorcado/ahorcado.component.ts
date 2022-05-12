@@ -94,7 +94,7 @@ export class AhorcadoComponent implements OnInit {
       //   text: 'Np, intenta otra vez.'
       // })
      
-      swal('Perdiste!😞');
+      swal('Perdiste!😞.');
       this.comenzarJuego();
     }, 1000);
 
