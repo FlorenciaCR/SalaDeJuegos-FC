@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import swalert from 'sweetalert';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -55,19 +55,21 @@ export class MayorMenorComponent implements OnInit {
     }
     if(this.intentos == 0){
       //mensaje
-      swalert({
-        title: 'Perdiste! 😞',
-        text: 'Np,intenta otra vez!'
-      })
+      // swal({
+      //   title: 'Perdiste! 😞',
+      //   text: 'Np,intenta otra vez!'
+      // })
+      swal('Perdiste!')
       this.mensaje2 = "Puntos: " + this.puntaje;
     }
 
     if(this.puntaje ==3)
     {
-      swalert({
-        title: 'Ganaste! 😎',
-        text: 'Un kpo'
-      })
+      // swal({
+      //   title: 'Ganaste! 😎',
+      //   text: 'Un kpo'
+      // })
+      swal('Ganaste!😎');
       this.comenzar = false;
       this.mensaje = "";
       this.mensaje2 = "";

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/clases/Usuario';
-import swalert from 'sweetalert';
+import swal from 'sweetalert';
 import { Router } from '@angular/router';
 
 
@@ -76,11 +76,12 @@ export class AhorcadoComponent implements OnInit {
     { 
 
       setTimeout(() =>{
-        swalert({
-          title: 'Ganaste!😎',
-          text: 'Un kpo, lo lograste!',
-          icon: "success",
-        })
+        // swal({
+        //   title: 'Ganaste!😎',
+        //   text: 'Un kpo, lo lograste!',
+        //   icon: "success",
+        // })
+        swal('Ganaste!😎');
       }, 2000);
     }
   }
@@ -88,11 +89,12 @@ export class AhorcadoComponent implements OnInit {
   detenerJuego(){
     this.estaJugando = false;
     setTimeout(() =>{
-      swalert({
-        title: 'Perdiste!😞',
-        text: 'Np, intenta otra vez.'
-      })
+      // swal({
+      //   title: 'Perdiste!😞',
+      //   text: 'Np, intenta otra vez.'
+      // })
      
+      swal('Perdiste!😞');
       this.comenzarJuego();
     }, 1000);
 

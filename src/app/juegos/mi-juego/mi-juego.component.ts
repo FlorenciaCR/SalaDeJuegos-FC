@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import swalert from 'sweetalert';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-mi-juego',
@@ -42,11 +42,12 @@ export class MiJuegoComponent implements OnInit {
      this.pelota.style.marginTop = Math.round(Math.random()*270) + "px";
       if (this.puntos == 15) 
       {
-       swalert({
-         title: 'Ganaste!😎',
-         text: 'Un kpo, lo lograste!',
-         icon: "success",
-       })	
+      //  swal({
+      //    title: 'Ganaste!😎',
+      //    text: 'Un kpo, lo lograste!',
+      //    icon: "success",
+      //  })
+      swal('Ganaste!😎');	
        this.estaJugando = false;
        this.tiempo =0;
       }
@@ -58,10 +59,11 @@ export class MiJuegoComponent implements OnInit {
           this.tiempo--;
           if (this.tiempo == 0 && this.puntos < 15)
           {
-            swalert({
-                    title: 'Perdiste!😞',
-                    text: 'Np, intenta otra vez.'
-            })
+            // swal({
+            //         title: 'Perdiste!😞',
+            //         text: 'Np, intenta otra vez.'
+            // })
+            swal('Perdiste!😞');
             this.tiempo = 0;
             this.puntos = 0;
             this.estaJugando = false;

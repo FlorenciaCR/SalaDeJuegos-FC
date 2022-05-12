@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import swalert from 'sweetalert';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-preguntados',
@@ -72,10 +72,11 @@ export class PreguntadosComponent implements OnInit {
   {
     this.estaJugando = false;
     this.juegoPausado = !this.estaJugando;
-    swalert({
-      title: 'Perdiste!😞',
-      text: 'Np, intenta otra vez.'
-    })
+    // swal({
+    //   title: 'Perdiste!😞',
+    //   text: 'Np, intenta otra vez.'
+    // })
+    swal('Perdiste!😞');
     //this.toastr.error('Intentalo de nuevo', '¡Perdiste!');
   }
 
