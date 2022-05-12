@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-mi-juego',
@@ -14,6 +14,7 @@ export class MiJuegoComponent implements OnInit {
   public pelota: any;
   public tiempo: number = 0;
   estaJugando : boolean = false;
+  mensajeJugador : string ='';
  
   randNum :number =0;
   randNum2 :number =0;
@@ -47,7 +48,8 @@ export class MiJuegoComponent implements OnInit {
       //    text: 'Un kpo, lo lograste!',
       //    icon: "success",
       //  })
-      swal('Ganaste!😎');	
+      this.mensajeJugador = 'Ganaste 😎';
+      //swal('Ganaste!😎');	
        this.estaJugando = false;
        this.tiempo =0;
       }
@@ -63,7 +65,8 @@ export class MiJuegoComponent implements OnInit {
             //         title: 'Perdiste!😞',
             //         text: 'Np, intenta otra vez.'
             // })
-            swal('Perdiste!😞');
+            //swal('Perdiste!😞');
+            this.mensajeJugador = 'Perdiste😞';
             this.tiempo = 0;
             this.puntos = 0;
             this.estaJugando = false;

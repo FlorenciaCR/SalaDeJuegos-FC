@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/clases/Usuario';
-import swal from 'sweetalert';
+
 import { Router } from '@angular/router';
 
 
@@ -18,6 +18,7 @@ export class AhorcadoComponent implements OnInit {
   palabraAdivinar : string = '';
   numeroFoto : number = 0;
   estaJugando : boolean = false;
+  mensajeJugador : string='';
 
   constructor() { }
 
@@ -81,7 +82,8 @@ export class AhorcadoComponent implements OnInit {
         //   text: 'Un kpo, lo lograste!',
         //   icon: "success",
         // })
-        swal('Ganaste!😎');
+        //swal('Ganaste!😎');
+        this.mensajeJugador='Ganaste!😎'
       }, 2000);
     }
   }
@@ -94,7 +96,8 @@ export class AhorcadoComponent implements OnInit {
       //   text: 'Np, intenta otra vez.'
       // })
      
-      swal('Perdiste!😞.');
+      //swal('Perdiste!😞.');
+      this.mensajeJugador='Perdiste!😞';
       this.comenzarJuego();
     }, 1000);
 

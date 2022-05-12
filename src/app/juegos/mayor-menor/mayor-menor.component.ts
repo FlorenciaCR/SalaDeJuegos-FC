@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -15,6 +14,7 @@ export class MayorMenorComponent implements OnInit {
   cartaNumber: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,14,15];
   carta: number =0;
   cartaSig: number=0;
+  mensajeJugador : string = '';
   
   constructor() { }
 
@@ -59,7 +59,8 @@ export class MayorMenorComponent implements OnInit {
       //   title: 'Perdiste! 😞',
       //   text: 'Np,intenta otra vez!'
       // })
-      swal('Perdiste!')
+      //swal('Perdiste!')
+      this.mensajeJugador = 'Perdiste😞';
       this.mensaje2 = "Puntos: " + this.puntaje;
     }
 
@@ -69,7 +70,7 @@ export class MayorMenorComponent implements OnInit {
       //   title: 'Ganaste! 😎',
       //   text: 'Un kpo'
       // })
-      swal('Ganaste!😎');
+      this.mensajeJugador = 'Ganaste😎';
       this.comenzar = false;
       this.mensaje = "";
       this.mensaje2 = "";

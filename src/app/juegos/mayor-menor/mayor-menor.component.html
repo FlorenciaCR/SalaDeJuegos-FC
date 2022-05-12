@@ -3,6 +3,7 @@
         <div class="" style="margin-top: 30px;">
             <button class="btn btn-success  " *ngIf="!comenzar" type="button" (click)="comenzarJuego()">Comenzar</button>
             <button class="btn btn-success " *ngIf="comenzar" type="button" (click)="reintentarJuego()">Reiniciar</button>
+            <p>{{mensajeJugador}}</p>
         </div>
         <!-- <div  *ngIf="comenzar" class="row" style="margin-top: 10px; margin-left: 550px;">
             <h1>Puntos: {{this.puntaje}}</h1>

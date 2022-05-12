@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-preguntados',
@@ -15,6 +15,7 @@ export class PreguntadosComponent implements OnInit {
   todosLosPaisesApi : any=[];
   paisElegidoRespuesta : any;
   paisesOpciones : any =[];
+  mensajeJugador : string ='';
 
   constructor(private apiPais : ApiService) 
   {
@@ -26,12 +27,14 @@ export class PreguntadosComponent implements OnInit {
     this.apiPais.getPaises().subscribe(paises =>{
       this.todosLosPaisesApi = paises;
       //this.puntos=0;
+      this.mensajeJugador='';
       console.log(this.todosLosPaisesApi)
     })
   }
 
   comenzarJuego()
   {
+    this.mensajeJugador  ='';
     this.paisElegidoRespuesta = null;
     this.paisesOpciones = [];
 
@@ -76,7 +79,8 @@ export class PreguntadosComponent implements OnInit {
     //   title: 'Perdiste!😞',
     //   text: 'Np, intenta otra vez.'
     // })
-    swal('Perdiste!😞');
+    //swal('Perdiste!😞');
+    this.mensajeJugador = 'Perdiste😞';
     //this.toastr.error('Intentalo de nuevo', '¡Perdiste!');
   }
 
