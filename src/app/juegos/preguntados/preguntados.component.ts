@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/servicios/api.service';
+import swalert from 'sweetalert';
 
 @Component({
   selector: 'app-preguntados',
@@ -7,9 +9,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreguntadosComponent implements OnInit {
 
-  constructor() { }
+  estaJugando: boolean = false;
+  puntos: number = 0;
+  juegoPausado: boolean=false;
+  todosLosPaisesApi : any=[];
+  paisElegidoRespuesta : any;
+  paisesOpciones : any =[];
 
-  ngOnInit(): void {
+  constructor(private apiPais : ApiService) 
+  {
+  }
+
+  ngOnInit(): void 
+  {
+    setTimeout(() => {}, 50);
+    this.apiPais.getPaises().subscribe(paises =>{
+      this.todosLosPaisesApi = paises;
+      //this.puntos=0;
+      console.log(this.todosLosPaisesApi)
+    })
+  }
+
+  comenzarJuego()
+  {
+    this.paisElegidoRespuesta = null;
+    this.paisesOpciones = [];
+
+    console.log('hola xd');
+    for (let i = 0; i < 4; i++)
+    {
+      var numeroRandPais = Math.floor(Math.random() * (249 - 0) + 0);
+      console.log('numeroPaisRandom '+ numeroRandPais);
+      if(i ==0)
+      {
+        this.paisElegidoRespuesta = this.todosLosPaisesApi[numeroRandPais];
+        console.log('pais'+this.paisElegidoRespuesta);
+      }
+      this.paisesOpciones.push(this.todosLosPaisesApi[numeroRandPais]);
+    }
+    console.log('pais elegido: '+this.paisElegidoRespuesta);
+  }
+
+  nuevoJuego()
+  {
+    this.puntos = 0;
+    this.estaJugando = true;
+    this.comenzarJuego();
+  }
+
+  elegirPais(pais: any)
+  {
+    if (pais == this.paisElegidoRespuesta) {
+      console.log('gano');
+      this.puntos++;
+      this.comenzarJuego();
+    } else {
+      this.detenerJuego();
+    }
+  }
+
+  detenerJuego()
+  {
+    this.estaJugando = false;
+    this.juegoPausado = !this.estaJugando;
+    swalert({
+      title: 'Perdiste!😞',
+      text: 'Np, intenta otra vez.'
+    })
+    //this.toastr.error('Intentalo de nuevo', '¡Perdiste!');
   }
 
 }

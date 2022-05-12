@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+
 import { AuthService } from '../servicios/auth.service';
 import * as moment from 'moment';
+import { ChatService } from '../servicios/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -12,19 +14,19 @@ export class ChatComponent implements OnInit {
 
   mensaje : string='';
   mensajes : any[] = []
-  angularFirestoreCollection : AngularFirestoreCollection<any> | undefined;   
-
   usuarioLogueado : any;
 
-  constructor(private auth : AuthService, private angularFirestore : AngularFirestore) 
+  constructor(private auth : AuthService, private chatService : ChatService) 
   { 
-    this.angularFirestoreCollection = this.angularFirestore.collection<any>('chats', ref => ref.orderBy('fecha', 'asc').limit(25)); 
-    this.angularFirestoreCollection.valueChanges().subscribe(x => {
-      this.mensajes = x
-    })
+
+    //Obtengo los mensajes de la coleccion
+    this.chatService.obtenerMensajes().subscribe(mjs=>{
+      this.mensajes = mjs;
+    });
     if(this.mensajes == null){
       this.mensajes = []
     }
+
   }
 
   ngOnInit(): void {
@@ -35,19 +37,18 @@ export class ChatComponent implements OnInit {
 
   enviarMensaje()
   {
-    let fecha = (moment(new Date())).format('DD-MM-YYYY HH:mm:ss')
-
+    let fecha = (moment(new Date())).format('DD-MM-YYYY HH:mm:ss');
     let mensaje =  {
       usuario:{
         id: this.usuarioLogueado.uid,
-        // nombre: this.usuarioLogueado.nombre,
         email: this.usuarioLogueado.email,
       },
       texto:this.mensaje,
       fecha: fecha
     }
     // this.mensajes.push(mensaje);
-    this.angularFirestoreCollection?.add(mensaje);
+
+    this.chatService.guardarMensaje(mensaje);
     this.mensaje = ""
   }
 }

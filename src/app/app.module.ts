@@ -18,7 +18,7 @@ import { NavBarComponent } from './paginas/nav-bar/nav-bar.component';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './servicios/chat.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,6 +42,7 @@ import { ChatService } from './servicios/chat.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [

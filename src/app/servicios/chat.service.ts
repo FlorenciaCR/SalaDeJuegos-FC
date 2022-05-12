@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,22 +7,20 @@ import { Observable } from 'rxjs';
 })
 
 export class ChatService {
-
-  private itemsCollection: AngularFirestoreCollection<any> | undefined;   
   
   constructor(private angularFirestore : AngularFirestore) 
   {
   }
 
-  obtenerMensajes():AngularFirestoreCollection<any>
+  obtenerMensajes()
   {
-    this.itemsCollection = this.angularFirestore.collection<any>('chats'); 
-    return this.itemsCollection
+    let coleccion = this.angularFirestore.collection<any>('chats',ref=> ref.orderBy('fecha', 'asc').limit(25));
+    return coleccion.valueChanges();
   }
 
-  guardarMensaje(mensaje:any, )
+  guardarMensaje(mensaje:any )
   {
-    return this.itemsCollection?.add(mensaje);
+    this.angularFirestore.collection<any>('chats').add(mensaje);
   }
 
 }

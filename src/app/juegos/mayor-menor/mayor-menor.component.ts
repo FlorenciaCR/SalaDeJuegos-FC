@@ -12,9 +12,10 @@ export class MayorMenorComponent implements OnInit {
   mensaje:string = "";
   mensaje2:string = "";
   intentos:number = 3;
-  cartaNumber: number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
+  cartaNumber: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,14,15];
   carta: number =0;
   cartaSig: number=0;
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -58,7 +59,20 @@ export class MayorMenorComponent implements OnInit {
         title: 'Perdiste! 😞',
         text: 'Np,intenta otra vez!'
       })
-      //this.mensaje2 = "cantidad de puntos totales: " + this.puntaje;
+      this.mensaje2 = "Puntos: " + this.puntaje;
+    }
+
+    if(this.puntaje ==3)
+    {
+      swalert({
+        title: 'Ganaste! 😎',
+        text: 'Un kpo'
+      })
+      this.comenzar = false;
+      this.mensaje = "";
+      this.mensaje2 = "";
+      this.puntaje = 0;
+      this.intentos = 0;
     }
 
     //mandamos la carta que sigue.

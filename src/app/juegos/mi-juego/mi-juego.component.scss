@@ -3,6 +3,7 @@
 	margin: 0px;
 	font-family: sans-serif;
 }
+
 .divJuego{
 	display: flex;
 	flex-direction: column;
@@ -13,30 +14,56 @@
     padding: 0px;
     
     width: 300px;
-    height: 300px;
+    height: 350px;
     //Eran 500 en los dos
     background-color: #ffb;
-    border: 8px dashed #993;
+    border: 8px dashed #A88EEF;
 }
 
 
 
 #player {
-	background-color: #900;
-	border: 4px dashed #b22;
+	background-color: #F0ABB5;
+	border: 4px dashed #D97789;
 	width: 50px;
 	height: 50px;
 	border-radius: 29px;
 	position: absolute;
-	transition: all 0.3s
+	transition: all 0.3s;
+	cursor: pointer;
 }
 .pointer {
-	background-color: #444;
-	height: 30px;
-	margin-top: 30px;
+	background-color: #B0E9FD;
+	
+	
 	border-bottom: 0px;
 	color: #fff;
 	font-size: 20px;
 	text-align: center;
 	padding: 10px 0px;
+}
+
+.divPuntaje{
+	display: flex;
+	justify-content: center;
+}
+
+span{
+	background-color: #217EDD;
+	border-radius: 4px;
+	padding: 4px;
+	margin:2px;
+}
+
+button{
+  border-radius: 4px;
+  background-color: #DF087A;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 4px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 2px;
 }

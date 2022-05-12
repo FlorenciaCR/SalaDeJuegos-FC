@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import swalert from 'sweetalert';
 
 @Component({
   selector: 'app-mi-juego',
@@ -9,46 +10,64 @@ import { CommonModule } from '@angular/common';
 })
 export class MiJuegoComponent implements OnInit {
 
-  puntos :number = 0;
-  tiempo :number= 60;
-  necesarios :number= 30;
+  public puntos :number = 0;
+  public pelota: any;
+  public tiempo: number = 0;
+  estaJugando : boolean = false;
+ 
   randNum :number =0;
   randNum2 :number =0;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.comenzarJuego();
+  }
+ 
+  comenzarJuego()
+  {
+   this.estaJugando = true;
+   this.tiempo = 20;
+   this.puntos = 0;
   }
 
-//no anda :()
-a : any = interval(1000).subscribe(()=>{
-  this.restarTiempo;
-})
- //setInterval(restarTiempo,1000);
- 
- sumarPuntos(){
-   this.puntos++;
-   //document.getElementById("puntos").innerHTML = "Puntos: <b>" + puntos + "/" + necesarios + "  </b>";
-   this.randNum =  Math.round(Math.random()*300);
-   this.randNum2 =  Math.round(Math.random()*300);
 
-  //  document.getElementById("player").style.marginTop =this.randNum + 'px';
-  //  document.getElementById("player").style.marginLeft =this. randNum2 + 'px';
-   if (this.puntos == 30) {
-   	alert("ganaste");
+
+ sumarPuntos(){
+   if(this.estaJugando)
+   {
+     this.puntos++;
+     this.pelota = document.getElementById("player");
+     this.pelota.style.marginLeft = Math.round(Math.random()*270) + "px";
+     this.pelota.style.marginTop = Math.round(Math.random()*270) + "px";
+      if (this.puntos == 15) 
+      {
+       swalert({
+         title: 'Ganaste!😎',
+         text: 'Un kpo, lo lograste!',
+         icon: "success",
+       })	
+       this.estaJugando = false;
+       this.tiempo =0;
+      }
    }
 }
 
-
-restarTiempo() {
-	this.tiempo--;
-	//document.getElementById("tiempo").innerHTML = "&nbsp;&nbsp;&nbsp;Tiempo: "+tiempo; 
-	if (this.tiempo == 0) {
-		alert("perdiste maestro");
-		this.tiempo = 0;
-		this.puntos = 0;
-	}
-}
+  contador :any = interval(1000).subscribe((n)=>{
+    if(this.tiempo > 0){
+          this.tiempo--;
+          if (this.tiempo == 0 && this.puntos < 15)
+          {
+            swalert({
+                    title: 'Perdiste!😞',
+                    text: 'Np, intenta otra vez.'
+            })
+            this.tiempo = 0;
+            this.puntos = 0;
+            this.estaJugando = false;
+          }
+        }
+   });
 
 
 
