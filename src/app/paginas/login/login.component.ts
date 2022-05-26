@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         if(res !=null )
         {
           let usuarioJson : any = {
-            email : this.miUsuario.email,
-            date: new Date() 
+            email : this.miUsuario.email, 
           }
           this.authService.sendUserLog(usuarioJson)
           .then(res=>{

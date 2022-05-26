@@ -14,6 +14,7 @@ export class ChatService {
 
   obtenerMensajes()
   {
+    console.log("obtener mensajes")
     let coleccion = this.angularFirestore.collection<any>('chats',ref=> ref.orderBy('fecha', 'asc').limit(25));
     return coleccion.valueChanges();
   }

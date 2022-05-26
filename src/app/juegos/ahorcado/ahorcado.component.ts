@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/clases/Usuario';
-
+import { AuthService } from 'src/app/servicios/auth.service';
 import { Router } from '@angular/router';
 
 
@@ -19,24 +19,47 @@ export class AhorcadoComponent implements OnInit {
   numeroFoto : number = 0;
   estaJugando : boolean = false;
   mensajeJugador : string='';
+  puntaje : number=0;
+  gano: boolean=false;
 
-  constructor() { }
+  msjLog='';
+
+  mostrarBotonResultado=false;
+
+  usuarioLog : any={
+    email:'',
+    id:0
+  }
+
+  constructor(private firebase :AuthService, ) 
+  {
+    firebase.getCurrentUser().subscribe(res=>{
+      if(res!=null)
+      {
+        this.usuarioLog.email = res.email;
+        this.usuarioLog.id = res.uid;
+      }
+    })
+   }
 
   ngOnInit(): void {
     this.comenzarJuego();
   }
 
+  reiniciarJuego()
+  {
+    location.reload;
+  }
   
 
   comenzarJuego(){
 
+    this.puntaje=0;
     this.intentosRestantes = 6;
     this.numeroFoto = 0;
     this.palabraAdivinar = this.palabras[Math.round(Math.random() * (this.palabras.length - 1))];
     this.cantidadLetrasPalabra = Array(this.palabraAdivinar.length).fill('_');
     this.estaJugando = true;
-   
-
   }
 
   letraElegida(letraApretada : string){
@@ -46,6 +69,7 @@ export class AhorcadoComponent implements OnInit {
       for(let i = 0; i < this.palabraAdivinar.length; i++){
         if(letraApretada.toLowerCase() == this.palabraAdivinar[i]){
           this.cantidadLetrasPalabra[i] = letraApretada;
+          this.puntaje++;
           flag = true;
         }
       }
@@ -59,51 +83,62 @@ export class AhorcadoComponent implements OnInit {
           this.numeroFoto++;
         }
       }
-      //console.log(this.cantidadLetrasPalabra);
       this.estadoJugador();
 
     }
   }
 
   estadoJugador(){
-    var gano=true;
+    this.gano=true;
 
     for (const i of this.cantidadLetrasPalabra) {
       if(i == "_"){
-        gano=false;
+        this.gano=false;
+       
       }
     }
-    if(gano)
+    if(this.gano)
     { 
 
+     
       setTimeout(() =>{
-        // swal({
-        //   title: 'Ganaste!😎',
-        //   text: 'Un kpo, lo lograste!',
-        //   icon: "success",
-        // })
-        //swal('Ganaste!😎');
+
         this.mensajeJugador='Ganaste!😎'
       }, 2000);
+      this.mostrarBotonResultado=true;
+      this.msjLog='gano';
     }
   }
 
   detenerJuego(){
     this.estaJugando = false;
+    this.puntaje=0;
     setTimeout(() =>{
-      // swal({
-      //   title: 'Perdiste!😞',
-      //   text: 'Np, intenta otra vez.'
-      // })
-     
-      //swal('Perdiste!😞.');
       this.mensajeJugador='Perdiste!😞';
-      this.comenzarJuego();
+      this.mostrarBotonResultado=true;
+      //this.comenzarJuego();
     }, 1000);
 
   }
   
-
+  obtenerYCrearResultado()
+  {
+    let fecha = new Date();
+    let hoy = fecha.toLocaleDateString();
+    let resultado ={
+      juego:'ahorcado',
+      user: this.usuarioLog,
+      fechaActual : hoy,
+      gano: this.gano
+    }
+    console.log(resultado);
+    this.firebase.sendUserResultado('ahorcadoResultados',resultado).then(res=>{
+      console.log('se mandaron(?');
+      this.mensajeJugador='Se mandaron los resultados!👌';
+    }).catch(err=>{
+      console.log('no se mando nada xd')
+    })
+  }
 
 
 

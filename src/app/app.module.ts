@@ -19,7 +19,8 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './servicios/chat.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { EncuestaComponent } from './paginas/encuesta/encuesta.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
    JuegosMenuComponent,
    NavBarComponent,
    ChatComponent,
+   EncuestaComponent,
  
   ],
   imports: [
@@ -43,6 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [

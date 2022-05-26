@@ -21,4 +21,8 @@
         <button  (click)="detenerJuego()" class="btn btn-danger " type="button">
                 Finalizar</button>
     </div>
+
+    <div *ngIf="mostrarR">
+        <button (click)="obtenerYCrearResultado()">Mandar resultados</button>
+    </div>
 </div>

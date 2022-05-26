@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 
 @Component({
@@ -16,9 +17,23 @@ export class PreguntadosComponent implements OnInit {
   paisElegidoRespuesta : any;
   paisesOpciones : any =[];
   mensajeJugador : string ='';
+  mostrarR: boolean= false;
 
-  constructor(private apiPais : ApiService) 
-  {
+  
+  usuarioLog : any={
+    email:'',
+    id:0
+  }
+
+  constructor(private apiPais : ApiService,private firebase :AuthService) 
+  { 
+    firebase.getCurrentUser().subscribe(res=>{
+      if(res!=null)
+      {
+        this.usuarioLog.email = res.email;
+        this.usuarioLog.id = res.uid;
+      }
+    })
   }
 
   ngOnInit(): void 
@@ -26,7 +41,7 @@ export class PreguntadosComponent implements OnInit {
     setTimeout(() => {}, 50);
     this.apiPais.getPaises().subscribe(paises =>{
       this.todosLosPaisesApi = paises;
-      //this.puntos=0;
+      this.puntos=0;
       this.mensajeJugador='';
       console.log(this.todosLosPaisesApi)
     })
@@ -34,6 +49,7 @@ export class PreguntadosComponent implements OnInit {
 
   comenzarJuego()
   {
+    this.mostrarR=false;
     this.mensajeJugador  ='';
     this.paisElegidoRespuesta = null;
     this.paisesOpciones = [];
@@ -67,6 +83,7 @@ export class PreguntadosComponent implements OnInit {
       this.puntos++;
       this.comenzarJuego();
     } else {
+      this.mostrarR= true;
       this.detenerJuego();
     }
   }
@@ -82,6 +99,27 @@ export class PreguntadosComponent implements OnInit {
     //swal('Perdiste!😞');
     this.mensajeJugador = 'Perdiste😞';
     //this.toastr.error('Intentalo de nuevo', '¡Perdiste!');
+  }
+
+
+  obtenerYCrearResultado()
+  {
+    //let juego ='preguntados',
+    let fecha = new Date();
+    let hoy = fecha.toLocaleDateString();
+    let resultado ={
+      juego:'preguntados',
+      user: this.usuarioLog,
+      fechaActual : hoy,
+      puntaje : this.puntos,
+    }
+    console.log(resultado);
+    this.firebase.sendUserResultado('preguntadoColeccion',resultado).then(res=>{
+      console.log('se mandaron(?')
+      this.mensajeJugador='Se mandaron los resultados!👌';
+    }).catch(err=>{
+      console.log('no se mando nada xd')
+    })
   }
 
 }

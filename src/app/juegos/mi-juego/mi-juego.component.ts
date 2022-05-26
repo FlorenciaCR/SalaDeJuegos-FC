@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, timer } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 
 @Component({
@@ -15,12 +15,27 @@ export class MiJuegoComponent implements OnInit {
   public tiempo: number = 0;
   estaJugando : boolean = false;
   mensajeJugador : string ='';
+  termino: boolean = false;
+
  
   randNum :number =0;
   randNum2 :number =0;
+  gano : boolean =false;
 
-  constructor() { }
-
+  usuarioLog : any={
+    email:'',
+    id:0
+  }
+  constructor(private firebase :AuthService) 
+  { 
+    firebase.getCurrentUser().subscribe(res=>{
+      if(res!=null)
+      {
+        this.usuarioLog.email = res.email;
+        this.usuarioLog.id = res.uid;
+      }
+    })
+  }
   ngOnInit(): void {
     this.comenzarJuego();
   }
@@ -43,15 +58,12 @@ export class MiJuegoComponent implements OnInit {
      this.pelota.style.marginTop = Math.round(Math.random()*270) + "px";
       if (this.puntos == 15) 
       {
-      //  swal({
-      //    title: 'Ganaste!😎',
-      //    text: 'Un kpo, lo lograste!',
-      //    icon: "success",
-      //  })
-      this.mensajeJugador = 'Ganaste 😎';
-      //swal('Ganaste!😎');	
+      this.mensajeJugador = 'Ganaste 😎, se mandaron los resultados!';
+      this.obtenerYCrearResultado();
        this.estaJugando = false;
        this.tiempo =0;
+       this.termino=true;
+       this.gano=true;
       }
    }
 }
@@ -61,12 +73,10 @@ export class MiJuegoComponent implements OnInit {
           this.tiempo--;
           if (this.tiempo == 0 && this.puntos < 15)
           {
-            // swal({
-            //         title: 'Perdiste!😞',
-            //         text: 'Np, intenta otra vez.'
-            // })
-            //swal('Perdiste!😞');
-            this.mensajeJugador = 'Perdiste😞';
+
+            this.mensajeJugador = 'Perdiste😞, se mandaron los resultados!';
+            this.obtenerYCrearResultado();
+            this.termino=true;
             this.tiempo = 0;
             this.puntos = 0;
             this.estaJugando = false;
@@ -74,6 +84,25 @@ export class MiJuegoComponent implements OnInit {
         }
    });
 
-
+   obtenerYCrearResultado()
+   {
+     let fecha = new Date();
+     let hoy = fecha.toLocaleDateString();
+     let resultado ={
+       juego:'truchoOsu',
+       user: this.usuarioLog,
+       fechaActual : hoy,
+       puntaje: this.puntos,
+       gano: this.gano
+     }
+     console.log(resultado);
+     this.firebase.sendUserResultado('truchOsuResultados',resultado).then(res=>{
+       console.log('se mandaron(?');
+       this.mensajeJugador='Se mandaron los resultados!👌';
+     }).catch(err=>{
+       console.log('no se mando nada xd')
+     })
+   }
+ 
 
 }

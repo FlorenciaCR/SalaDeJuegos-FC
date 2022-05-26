@@ -1,5 +1,8 @@
+<div class="contenedorJuego" *ngIf="!estaJugando">
+    <button (click)= "obtenerYCrearResultado()">Mandar resultados</button>
+</div>
 
-<div class="container d-flex flex-column justify-content-center " >
+<div  class="container d-flex flex-column justify-content-center " *ngIf="estaJugando" >
     <div class="row">
         <div class="col-md-12 text-center ">
             <h2 style="margin-top:10px; font-weight: bolder;">AHORCADO</h2>
@@ -30,8 +33,9 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class=" col-md-8 container" style="margin-bottom:10px">
-                <button class="btn text-center shadow" style="background-color: #663A82; color: white; font-weight: bold; " *ngFor="let letra of letrasBotones" (click)="letraElegida(letra)"> {{ letra }} </button>
+                <button class="btn text-center shadow boton" style="background-color: #663A82; color: white; font-weight: bold; " *ngFor="let letra of letrasBotones" (click)="letraElegida(letra)"> {{ letra }} </button>
         </div>
         <div class="col-md-2"></div>
     </div>
 </div>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -15,8 +16,23 @@ export class MayorMenorComponent implements OnInit {
   carta: number =0;
   cartaSig: number=0;
   mensajeJugador : string = '';
+
+
+  usuarioLog : any={
+    email:'',
+    id:0
+  }
   
-  constructor() { }
+  constructor(private firebase :AuthService) 
+  { 
+    firebase.getCurrentUser().subscribe(res=>{
+      if(res!=null)
+      {
+        this.usuarioLog.email = res.email;
+        this.usuarioLog.id = res.uid;
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.comenzarJuego();
@@ -62,6 +78,7 @@ export class MayorMenorComponent implements OnInit {
       //swal('Perdiste!')
       this.mensajeJugador = 'Perdiste😞';
       this.mensaje2 = "Puntos: " + this.puntaje;
+      this.comenzar = false;
     }
 
     if(this.puntaje ==3)
@@ -94,4 +111,32 @@ export class MayorMenorComponent implements OnInit {
     this.puntaje = 0;
     this.intentos = 3;
   }
+
+
+  // let usuarioJson : any = {
+  //   email : this.miUsuario.email,
+  //   date: new Date() 
+  // }
+
+
+
+  obtenerYCrearResultado()
+  {
+    let fecha = new Date();
+    let hoy = fecha.toLocaleDateString();
+    let resultado ={
+      juego:'mayor-menor',
+      user: this.usuarioLog,
+      fechaActual : hoy,
+      puntaje : this.puntaje,
+    }
+    console.log(resultado);
+    this.firebase.sendUserResultado('mayorMenorResultados',resultado).then(res=>{
+      console.log('se mandaron(?');
+      this.mensajeJugador='Se mandaron los resultados!👌';
+    }).catch(err=>{
+      console.log('no se mando nada xd')
+    })
+  }
+
 }

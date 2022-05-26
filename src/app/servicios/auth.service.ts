@@ -41,6 +41,16 @@ export class AuthService {
     return this.firestore.collection("userLogins").add(user);
   }
 
+  sendUserResultado(nombre:string ,resultado : any){  
+    return this.firestore.collection(nombre).add(resultado);
+  }
+
+  sendUserEncuesta(encuesta : any){  
+    return this.firestore.collection("userEncuesta").add(encuesta);
+  }
+
+
+
 
 
 
