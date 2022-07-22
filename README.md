@@ -1,27 +1,27 @@
-# TPSalaDeJuegosLabIVFC
+<h1>Sala de juegos 🕹️<h1/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
+  
+## Ir a la pagina web: https://saladejuegos-colodrof.herokuapp.com/ 🚀
 
-## Development server
+## Entrar 👤
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+  ![image](https://user-images.githubusercontent.com/60653223/180516447-034862d2-5b30-40eb-a706-d4b061884d90.png)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Registro 📝
 
-## Build
+![image](https://user-images.githubusercontent.com/60653223/180516659-99ebe164-b0b1-4c07-a2bf-8d00ba26a736.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Bienvenido 🌈
+![image](https://user-images.githubusercontent.com/60653223/180516800-ae3c1023-97f3-40a0-b1b0-aeb5e94ad48b.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+  
+## Juegos 🎮
+![image](https://user-images.githubusercontent.com/60653223/180517079-121c1f6c-6b2f-4483-886d-1c0b5152fa00.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Quien soy 📝
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![image](https://user-images.githubusercontent.com/60653223/180517143-b3b053ae-6553-4bb7-9b9a-9706232eaebc.png)
